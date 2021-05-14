@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.service.BoardService;
 import kr.co.vo.BoardVO;
+import kr.co.vo.Criteria;
+import kr.co.vo.PageMaker;
 
 @Controller
 @RequestMapping("/board/*")
@@ -37,15 +39,22 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	// 게시글 목록 조회
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) throws Exception {
-		logger.info("list");
-		
-		model.addAttribute("list", service.list());
-		
-		return "board/list";
-	}
+	
+	//게시글 목록 조회
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public String list(Model model, Criteria cri) throws Exception{
+			logger.info("list");
+			
+			model.addAttribute("list",service.list(cri));
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(service.listCount());
+			
+			model.addAttribute("pageMaker",pageMaker);
+			
+			return "board/list";
+		}
 	
 	// 게시물 조회
 	@RequestMapping(value="/readView", method=RequestMethod.GET)
