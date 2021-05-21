@@ -10,6 +10,7 @@
 <title>게시판</title>
 </head>
 <script type="text/javascript">
+
 	$(document).ready(function(){
 		var formObj = $("form[name='readForm']");
 		//수정
@@ -32,9 +33,11 @@
 			}
 		})
 		
-		//취소
+		//목록
 		$(".list_btn").on("click",function(){
-			location.href = "/board/list";
+			location.href = "/board/list?page=${scri.page}"
+						+ "&perPageNum=${scri.perPageNum}"
+						+ "&SearchType=${scri.searchType}&keyword=${scri.keyword}";
 		})
 	})
 </script>
@@ -53,6 +56,10 @@
 		<section id="container">
 			<form name="readForm" role="form" method="post">
 				<input type="hidden" id="bno" name="bno" value="${read.bno}" />
+				<input type="hidden" id="page" name="perPage" value="${scri.page}" />
+				<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}" />
+				<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}" />
+				<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}" />
 			</form>
 				<table>
 					<tbody>

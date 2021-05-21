@@ -16,7 +16,11 @@
 		
 		$(".cancel_btn").on("click", function(){
 			event.preventDefault();
-			location.href = "/board/list";
+			location.href = "/board/readView?bno=${update.bno}"
+					+"&page=${scri.page}"
+					+"&perPageNum=${scri.perPageNum}"
+					+"&searchType=${scri.searchType}"
+					+"&keyword=${scri.keyword}";
 		})
 		
 		$(".update_btn").on("click",function(){
@@ -81,7 +85,7 @@
 				</table>
 				<div>
 					<button type="button" class="update_btn">저장</button>
-					<button type="submit" class="cancel_btn">취소</button>
+					<button type="button" class="cancel_btn">취소</button>
 				</div>
 			</form>
 		</section>
